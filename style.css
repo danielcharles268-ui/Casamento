@@ -1,0 +1,601 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CONVITE DE CASAMENTO - ESTILO CSS COMPLETO
+   Paleta: Verde-floresta (#3d6b4f), Verde-sálvia (#c8d9b0), Creme (#f5f0e8), Dourado (#b8965a)
+   Tipografia: Great Vibes (script), Cormorant Garamond (serif), Lato (body)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #c8d9b0;
+    background-image: url('fundo.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #2c4a35;
+    overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CANVAS PARA CONFETE
+   ───────────────────────────────────────────────────────────────────────────── */
+
+#confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 40;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TELA DO ENVELOPE
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.envelope-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.envelope-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.envelope-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(200, 217, 176, 0.15);
+}
+
+.envelope-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 32px;
+}
+
+.envelope-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    filter: drop-shadow(0 12px 32px rgba(61, 107, 79, 0.25));
+    animation: float-leaf 3s ease-in-out infinite;
+    perspective: 1000px;
+}
+
+.envelope-btn.clicked {
+    animation: envelopeOpen 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.envelope-image {
+    width: min(320px, 80vw);
+    height: auto;
+    display: block;
+}
+
+.envelope-text {
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.envelope-text.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.envelope-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #3d6b4f;
+}
+
+.envelope-arrow {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    animation: fadeInUp 1s ease infinite alternate;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CONTEÚDO DO CONVITE
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.convite-content {
+    min-height: 100dvh;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+    display: block;
+}
+
+.convite-content.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.convite-wrapper {
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SEÇÃO DE CABEÇALHO
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px 24px 32px;
+}
+
+.ornament-top {
+    margin-bottom: 16px;
+    opacity: 0.6;
+}
+
+.names-main {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 14vw, 4.5rem);
+    color: #2c4a35;
+    line-height: 1.1;
+    margin-bottom: 4px;
+    font-weight: 400;
+}
+
+.names-and {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2rem, 9vw, 3rem);
+    color: #b8965a;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+    font-weight: 400;
+}
+
+.subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5a7a5a;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+.ornament-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #b8965a;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 24px;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #b8965a, transparent);
+}
+
+.date-display {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #2c4a35;
+}
+
+.date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.date-number {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+    line-height: 1;
+    display: block;
+}
+
+.date-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #5a7a5a;
+}
+
+.date-divider {
+    width: 1px;
+    height: 60px;
+    background: rgba(61, 107, 79, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SEÇÃO DE CARROSSEL
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.carousel-section {
+    padding: 24px;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 360px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(61, 107, 79, 0.2);
+    background: rgba(245, 240, 232, 0.5);
+    aspect-ratio: 1 / 1;
+}
+
+.carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-message {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(61, 107, 79, 0.7) 0%, rgba(61, 107, 79, 0.5) 100%);
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.carousel-slide.active .carousel-message {
+    animation: fadeMessageIn 0.8s ease forwards;
+    animation-delay: 0.3s;
+}
+
+.message-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.4rem;
+    color: #f5f0e8;
+    text-align: center;
+    line-height: 1.6;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 20;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot.active {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.2);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SEÇÃO DE CONTAGEM REGRESSIVA
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.countdown-section {
+    padding: 0 24px 32px;
+}
+
+.countdown-card {
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(184, 150, 90, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(61, 107, 79, 0.15), 0 2px 8px rgba(61, 107, 79, 0.08);
+    padding: 20px;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.countdown-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5a7a5a;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.countdown-boxes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.countdown-box {
+    background: rgba(61, 107, 79, 0.12);
+    border: 1px solid rgba(61, 107, 79, 0.25);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px;
+}
+
+.countdown-number {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    color: #3d6b4f;
+    line-height: 1;
+    display: block;
+    min-width: 2ch;
+    text-align: center;
+}
+
+.countdown-unit {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5a7a5a;
+    margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SEÇÃO DE AÇÕES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.actions-section {
+    padding: 0 24px 48px;
+}
+
+.actions-card {
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(184, 150, 90, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(61, 107, 79, 0.15), 0 2px 8px rgba(61, 107, 79, 0.08);
+    padding: 24px;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.actions-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: nowrap;
+}
+
+.action-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-circle {
+    background: #3d6b4f;
+    color: #f5f0e8;
+    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(61, 107, 79, 0.35);
+    transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms ease;
+}
+
+.action-button:active .btn-circle {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(61, 107, 79, 0.25);
+}
+
+.action-button:hover .btn-circle {
+    background: #2c4a35;
+    box-shadow: 0 6px 20px rgba(61, 107, 79, 0.45);
+}
+
+.button-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    color: #3d6b4f;
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 80px;
+    text-align: center;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RODAPÉ
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.footer-section {
+    text-align: center;
+    padding-bottom: 32px;
+    color: #5a7a5a;
+}
+
+.footer-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.6rem;
+    color: #3d6b4f;
+    margin-bottom: 4px;
+}
+
+.footer-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.3rem;
+    color: #5a7a5a;
+}
+
+.footer-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #8aab8a;
+    margin-top: 16px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ANIMAÇÕES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeMessageIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float-leaf {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-6px) rotate(1deg); }
+    66% { transform: translateY(-3px) rotate(-1deg); }
+}
+
+@keyframes envelopeOpen {
+    0% {
+        transform: scale(1) rotateY(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05) rotateY(15deg);
+    }
+    100% {
+        transform: scale(0.8) rotateY(90deg);
+        opacity: 0;
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   UTILITÁRIOS
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.hidden {
+    display: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RESPONSIVIDADE
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .actions-buttons {
+        gap: 16px;
+    }
+
+    .btn-circle {
+        width: 64px;
+        height: 64px;
+    }
+
+    .button-label {
+        font-size: 0.7rem;
+        max-width: 70px;
+    }
+
+    .message-text {
+        font-size: 1.1rem;
+    }
+}

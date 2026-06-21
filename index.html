@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#c8d9b0">
+    <meta name="description" content="Convite de Casamento - Fransuilame & Samara - 27/12/2026">
+    <title>Convite de Casamento - Fransuilame & Samara</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- CANVAS PARA CONFETE -->
+    <canvas id="confetti"></canvas>
+
+    <!-- ÁUDIO DE FUNDO -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- TELA DO ENVELOPE -->
+    <div id="envelopeScreen" class="envelope-screen">
+        <div class="envelope-overlay"></div>
+        <div class="envelope-container">
+            <button id="envelopeBtn" class="envelope-btn" aria-label="Abrir convite">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663782010271/LxNtmCBy8Dx8iNWJdkfk7r/envelope-casamento-9j4g4VgibVpeub9m4R2RvS.webp" alt="Envelope do convite" class="envelope-image">
+            </button>
+            <div class="envelope-text">
+                <p class="envelope-label">Toque para abrir</p>
+                <div class="envelope-arrow">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 4v12M10 16l-4-4M10 16l4-4" stroke="#3d6b4f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO DO CONVITE -->
+    <div id="conviteContent" class="convite-content hidden">
+        <div class="convite-wrapper">
+            <!-- SEÇÃO DE CABEÇALHO -->
+            <section class="header-section fade-in-up">
+                <div class="ornament-top">
+                    <svg width="60" height="24" viewBox="0 0 60 24" fill="none">
+                        <path d="M0 12 Q15 4 30 12 Q45 20 60 12" stroke="#b8965a" stroke-width="1" fill="none"/>
+                        <circle cx="30" cy="12" r="2.5" fill="#b8965a"/>
+                    </svg>
+                </div>
+
+                <h1 class="names-main">Fransuilame</h1>
+                <span class="names-and">&amp;</span>
+                <h1 class="names-main">Samara</h1>
+
+                <p class="subtitle">Convidamos para celebrar a nossa união</p>
+
+                <div class="ornament-divider">
+                    <span>✦</span>
+                </div>
+
+                <div class="date-display">
+                    <div class="date-box">
+                        <span class="date-number">27</span>
+                        <span class="date-label">Dia</span>
+                    </div>
+                    <div class="date-divider"></div>
+                    <div class="date-box">
+                        <span class="date-number">12</span>
+                        <span class="date-label">Mês</span>
+                    </div>
+                    <div class="date-divider"></div>
+                    <div class="date-box">
+                        <span class="date-number">2026</span>
+                        <span class="date-label">Ano</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO DE CARROSSEL DE FOTOS -->
+            <section class="carousel-section fade-in-up" style="animation-delay: 0.15s">
+                <div class="carousel-container">
+                    <div class="carousel-slide">
+                        <img src="fotos/foto1.jpg" alt="Foto do casal" class="carousel-image">
+                        <div class="carousel-message fade-text">
+                            <p class="message-text">Estamos felizes em convidá-los para celebrar nosso grande dia!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="fotos/foto2.jpg" alt="Foto do casal" class="carousel-image">
+                        <div class="carousel-message fade-text">
+                            <p class="message-text">Será uma honra contar com sua presença neste momento especial.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="fotos/foto3.jpg" alt="Foto do casal" class="carousel-image">
+                        <div class="carousel-message fade-text">
+                            <p class="message-text">Venha compartilhar conosco este dia inesquecível!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+            </section>
+
+            <!-- SEÇÃO DE CONTAGEM REGRESSIVA -->
+            <section class="countdown-section fade-in-up" style="animation-delay: 0.3s">
+                <div class="countdown-card">
+                    <p class="countdown-label">Faltam apenas</p>
+                    <div class="countdown-boxes">
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="days">0</span>
+                            <span class="countdown-unit">Dias</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="hours">0</span>
+                            <span class="countdown-unit">Horas</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="minutes">0</span>
+                            <span class="countdown-unit">Min</span>
+                        </div>
+                        <div class="countdown-box">
+                            <span class="countdown-number" id="seconds">0</span>
+                            <span class="countdown-unit">Seg</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO DE AÇÕES -->
+            <section class="actions-section fade-in-up" style="animation-delay: 0.45s">
+                <div class="ornament-divider">
+                    <span>✦</span>
+                </div>
+
+                <div class="actions-card">
+                    <div class="actions-buttons">
+                        <a href="https://wa.me/5500000000000?text=Olá!%20Confirmo%20minha%20presença%20no%20casamento%20de%20Fransuilame%20e%20Samara%20🌿" target="_blank" rel="noopener noreferrer" class="action-button">
+                            <div class="btn-circle">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <span class="button-label">Confirme sua presença  
+(Noivo )</span>
+                        </a>
+
+                        <a href="https://wa.me/5500000000001?text=Olá!%20Confirmo%20minha%20presença%20no%20casamento%20de%20Fransuilame%20e%20Samara%20🌿" target="_blank" rel="noopener noreferrer" class="action-button">
+                            <div class="btn-circle">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <span class="button-label">Confirme sua presença  
+(Noiva )</span>
+                        </a>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query=R.+Maurício+de+Nassau,+95,+Trindade,+PE,+56250-000" target="_blank" rel="noopener noreferrer" class="action-button">
+                            <div class="btn-circle">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <span class="button-label">Local da  
+festa</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RODAPÉ -->
+            <section class="footer-section fade-in-up" style="animation-delay: 0.6s">
+                <div class="ornament-divider">
+                    <span>✦</span>
+                </div>
+                <p class="footer-text">Com amor,</p>
+                <p class="footer-names">Fransuilame &amp; Samara</p>
+                <p class="footer-date">27 · 12 · 2026</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
